@@ -41,8 +41,8 @@ const Content = () => {
               gap: 16,
             }}
           >
-            {[1, 2, 3, 4, 5].map(() => (
-              <Card />
+            {[1, 2, 3, 4, 5].map((val) => (
+              <Card key={val}/>
             ))}
           </div>
         </div>
