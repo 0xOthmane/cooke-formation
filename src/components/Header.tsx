@@ -20,6 +20,29 @@ const Header = () => {
         <i className="fa-solid fa-bars"></i>
         <img src={logo} alt="Logo" width={100} />
       </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          height: 25,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search a recipe"
+          style={{
+            height: 20,
+            width: 250,
+          }}
+        />
+        <i
+          className="fa-solid fa-magnifying-glass"
+          style={{
+            cursor: "pointer",
+          }}
+        ></i>
+      </div>
 
       <div>
         <button

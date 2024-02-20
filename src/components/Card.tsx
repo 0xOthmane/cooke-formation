@@ -1,6 +1,16 @@
-import placeholder from "../assets/images/placeholder.jpg";
+import { useState } from "react";
 
-const Card = () => {
+interface CardProps {
+  recipe: { title: string; image: string; isLiked: boolean };
+}
+
+const Card = ({ recipe }: CardProps) => {
+  const [like, setLike] = useState<boolean>(recipe.isLiked);
+
+  const onClick = () => {
+    setLike(!like);
+    console.log(like)
+  };
   return (
     <div
       style={{
@@ -13,10 +23,38 @@ const Card = () => {
         backgroundClip: "padding-box",
         WebkitBackgroundClip: "padding-box",
         borderRadius: "10px",
+        position: "relative",
       }}
     >
-      <img src={placeholder} alt="placeholder" width={250} />
-      <p>Menu Burger</p>
+      {like && (
+        <i
+          className="fa-solid fa-heart"
+          style={{
+            position: "absolute",
+            top: 5,
+            right: 10,
+            color: "red",
+            cursor: "pointer",
+          }}
+          onClick={onClick}
+        ></i>
+      )}
+      {!like && (
+        <i
+          className="fa-regular fa-heart"
+          style={{
+            position: "absolute",
+            top: 5,
+            right: 10,
+            color: "red",
+            cursor: "pointer",
+          }}
+          onClick={onClick}
+        ></i>
+      )}
+
+      <img src={recipe.image} alt="placeholder" width={250} />
+      <p>{recipe.title}</p>
     </div>
   );
 };

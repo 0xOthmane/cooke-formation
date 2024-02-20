@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import placeholder from "../assets/images/placeholder.jpg";
 import Card from "./Card";
+import { seedData } from "../data/seed";
 const Content = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [isMobile, setIsMobile] = useState(width <= 768);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -14,6 +15,9 @@ const Content = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [width]);
+  useEffect(() => {
+    seedData().then((data) => setRecipes(data.data));
+  }, []);
   return (
     <div
       style={{
@@ -41,8 +45,9 @@ const Content = () => {
               gap: 16,
             }}
           >
-            {[1, 2, 3, 4, 5].map((val) => (
-              <Card key={val}/>
+            {recipes?.map((recipe,i) => (
+              <Card key={i} recipe={recipe} />
+              
             ))}
           </div>
         </div>
