@@ -1,14 +1,16 @@
-import Content from "./components/Content";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Layout from "./pages/Layout";
+import RecipePage from "./pages/RecipePage";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Content />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="add-recipe" element={<RecipePage />} />
+      </Route>
+    </Routes>
   );
 }
 

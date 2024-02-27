@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 const Header = () => {
   return (
@@ -18,7 +19,9 @@ const Header = () => {
         }}
       >
         <i className="fa-solid fa-bars"></i>
-        <img src={logo} alt="Logo" width={100} />
+        <Link to="/">
+          <img src={logo} alt="Logo" width={100} />
+        </Link>
       </div>
       <div
         style={{
@@ -44,7 +47,26 @@ const Header = () => {
         ></i>
       </div>
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          gap: 12,
+        }}
+      >
+        <Link to="add-recipe">
+          <button
+            style={{
+              paddingBlock: 8,
+              paddingInline: 16,
+              border: "solid 1px white",
+              borderRadius: 10,
+              cursor: "pointer",
+            }}
+          >
+            Add a recipe
+          </button>
+        </Link>
+
         <button
           style={{
             paddingBlock: 8,
@@ -65,7 +87,6 @@ const Header = () => {
             paddingInline: 16,
             border: "solid 1px grey",
             borderRadius: 10,
-            marginLeft: 8,
             color: "black",
             backgroundColor: "#FFFFFF",
           }}
