@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import useFetchData from "../hooks/useFetchData";
 import Card from "./Card";
-import { seedData } from "../data/seed";
 const Content = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [isMobile, setIsMobile] = useState(width <= 768);
-  const [recipes, setRecipes] = useState([]);
+  const { recipes, setRecipes } = useFetchData();
+
+  const onDelete = (title: string) => {
+    return () => setRecipes(recipes.filter((recipe) => recipe.title !== title));
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,9 +19,7 @@ const Content = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [width]);
-  useEffect(() => {
-    seedData().then((data) => setRecipes(data.data));
-  }, []);
+
   return (
     <div
       style={{
@@ -45,9 +47,8 @@ const Content = () => {
               gap: 16,
             }}
           >
-            {recipes?.map((recipe,i) => (
-              <Card key={i} recipe={recipe} />
-              
+            {recipes?.map((recipe, i) => (
+              <Card key={i} recipe={recipe} onDelete={onDelete(recipe.title)} />
             ))}
           </div>
         </div>
